@@ -7,13 +7,21 @@ var cursors;
 var stars;
 var score = 0;
 var scoreText;
+
+    function collectStar (player, star)
+    {
+        // Removes the star from the screen
+        star.kill();
+        score++;
+    }
+
 function preload() {
 
     game.load.image('sky', 'assets/sky.png');
     game.load.image('ground', 'assets/platform.png');
     game.load.image('star', 'assets/star.png');
     game.load.spritesheet('dude', 'assets/dude.png', 32, 48);
-
+    
 }
 
 function create() {
@@ -79,8 +87,25 @@ function create() {
         // Create a star inside of the 'stars' group
         var star = stars.create(i * 70, 265, 'star');
         
+        // Let gravity do its thing
+        star.body.gravity.y - 6;
+        star.body.bounce.y = 0.7 + Math.random() * 0.2;
+    }
+    
+    for (i = 4.15; i < 10.15; i++)
+    {
         // Create a star inside of the 'stars' group
-        star = stars.create(i * 70, 300, 'star');
+        star = stars.create(i * 70, 115, 'star');
+        
+        // Let gravity do its thing
+        star.body.gravity.y - 6;
+        star.body.bounce.y = 0.7 + Math.random() * 0.2;
+    }
+    
+    for (i = 6.75; i < 12.75; i++)
+    {
+        // Create a star inside of the 'stars' group
+        star = stars.create(i * 70, 390, 'star');
         
         // Let gravity do its thing
         star.body.gravity.y - 6;
@@ -123,10 +148,12 @@ function update() {
         player.frame = 4;
     }
     
+    
     // Allow the plater to jump if they are touching the ground
     if  (cursors.up.isDown && player.body.touching.down && hitPlatform)
     {
-        player.body.velocity.y = -350;
+        player.body.velocity.y = -200;
+        playerJumped = true;
     }
     
     game.physics.arcade.collide(stars, platforms);
@@ -137,12 +164,6 @@ function update() {
     
     
     scoreText.text = "Score: " + score;
+    
 
 }
-
-    function collectStar (player, star)
-    {
-        // Removes the star from the screen
-        star.kill();
-        score++;
-    }
