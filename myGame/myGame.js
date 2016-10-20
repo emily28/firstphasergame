@@ -23,7 +23,7 @@ function preload() {
     game.load.image('sky', 'assets/moonbackground.png');
     game.load.image('platform', 'assets/mainground.png');
     game.load.image('ground', 'assets/myground.png');
-    game.load.image('star', 'assets/star.png');
+    game.load.spritesheet('star', 'assets/star.png', 24, 22);
     game.load.spritesheet('dude', 'assets/ghost3.png', 33, 48);
 
 }
@@ -107,7 +107,6 @@ function create() {
     // figure this out
     player.animations.add('stand', [4, 5, 6, 7], 7, true);
 
-
     cursors = game.input.keyboard.createCursorKeys();
 
 
@@ -127,7 +126,7 @@ function create() {
 
     for (i = 4.15; i < 10.15; i++) {
         // Create a star inside of the 'stars' group
-        star = stars.create(i * 70, 115, 'star');
+        star = stars.create(i * 70, 100, 'star');
 
         // Let gravity do its thing
         star.body.gravity.y - 6;
@@ -139,8 +138,8 @@ function create() {
         star = stars.create(i * 70, 390, 'star');
 
         // Let gravity do its thing
-        star.body.gravity.y = 3;
-        star.body.bounce.y = 0.3 + Math.random() * 0.1;
+        star.body.gravity.y - 6;
+        star.body.bounce.y = 0.7 + Math.random() * 0.2;
     }
     scoreText = game.add.text(16, 16, 'score: 0', {
         fontSize: '32px',
